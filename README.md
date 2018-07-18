@@ -1,2 +1,6 @@
 # SDL2-particles
-A Particles of SDL2
+A Particle System of SDL2.
+
+
+
+Modified from Cocos2dx.
