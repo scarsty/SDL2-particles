@@ -67,17 +67,22 @@ ParticleSystem::ParticleSystem()
 bool ParticleSystem::initWithTotalParticles(int numberOfParticles)
 {
     _totalParticles = numberOfParticles;
-
-    if (particle_data_.size() < numberOfParticles)
-    {
-        particle_data_.resize(numberOfParticles);
-    }
     _isActive = true;
     _emitterMode = Mode::GRAVITY;
     _isAutoRemoveOnFinish = false;
     _transformSystemDirty = false;
 
+    resetTotalParticles(numberOfParticles);
+
     return true;
+}
+
+void ParticleSystem::resetTotalParticles(int numberOfParticles)
+{
+    if (particle_data_.size() < numberOfParticles)
+    {
+        particle_data_.resize(numberOfParticles);
+    }
 }
 
 ParticleSystem::~ParticleSystem()
@@ -268,14 +273,6 @@ void ParticleSystem::addParticles(int count)
             }
         }
     }
-}
-
-void ParticleSystem::onEntrance()
-{
-}
-
-void ParticleSystem::onExit()
-{
 }
 
 void ParticleSystem::stopSystem()

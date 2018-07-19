@@ -580,12 +580,9 @@ public:
     void setOpacityModifyRGB(bool opacityModifyRGB) { _opacityModifyRGB = opacityModifyRGB; }
     bool isOpacityModifyRGB() const { return _opacityModifyRGB; }
 
-    // Overrides
-    virtual void onEntrance();
-    virtual void onExit();
-    virtual SDL_Texture* getTexture();
-    virtual void setTexture(SDL_Texture* texture);
-    virtual void draw();
+    SDL_Texture* getTexture();
+    void setTexture(SDL_Texture* texture);
+    void draw();
     void update();
 
     ParticleSystem();
@@ -593,6 +590,7 @@ public:
 
     /** initializes a ParticleSystem*/
     virtual bool initWithTotalParticles(int numberOfParticles);
+    virtual void resetTotalParticles(int numberOfParticles);
     virtual bool isPaused() const;
     virtual void pauseEmissions();
     virtual void resumeEmissions();

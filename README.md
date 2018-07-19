@@ -20,9 +20,9 @@ int main(int, char* argv[])
     auto win = SDL_CreateWindow("SDL2 Particles", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1024, 768, SDL_WINDOW_OPENGL);
     auto ren = SDL_CreateRenderer(win, -1, SDL_RENDERER_ACCELERATED);
 
-    auto p = new ParticleExample();    //create a new particle system pointer
-    p->setRenderer(ren);    // set the renderer
-    p->setPosition(512, 384);    // set the position
+    auto p = new ParticleExample();        // create a new particle system pointer
+    p->setRenderer(ren);                   // set the renderer
+    p->setPosition(512, 384);              // set the position
     p->setStyle(ParticleExample::FIRE);    // set the example effects
 
     while (1)
