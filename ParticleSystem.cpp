@@ -1,7 +1,7 @@
 #include "ParticleSystem.h"
+#include <algorithm>
 #include <assert.h>
 #include <string>
-#include <algorithm>
 
 inline float Deg2Rad(float a)
 {
@@ -59,56 +59,7 @@ inline static float RANDOM_M11(unsigned int* seed)
 }
 
 ParticleSystem::ParticleSystem()
-    : _isBlendAdditive(false)
-    , _isAutoRemoveOnFinish(false)
-    , _plistFile("")
-    , _elapsed(0)
-    , _configName("")
-    , _emitCounter(0)
-      //, _batchNode(nullptr)
-    , _atlasIndex(0)
-    , _transformSystemDirty(false)
-    , _allocatedParticles(0)
-    , _isActive(true)
-    , _particleCount(0)
-    , _duration(0)
-    , _life(0)
-    , _lifeVar(0)
-    , _angle(0)
-    , _angleVar(0)
-    , _emitterMode(Mode::GRAVITY)
-    , _startSize(0)
-    , _startSizeVar(0)
-    , _endSize(0)
-    , _endSizeVar(0)
-    , _startSpin(0)
-    , _startSpinVar(0)
-    , _endSpin(0)
-    , _endSpinVar(0)
-    , _emissionRate(0)
-    , _totalParticles(0)
-    , _texture(nullptr)
-      //, _blendFunc(BlendFunc::ALPHA_PREMULTIPLIED)
-    , _opacityModifyRGB(false)
-    , _yCoordFlipped(1)
-      //, _positionType(PositionType::FREE)
-    , _paused(false)
-    , _sourcePositionCompatible(true)    // In the furture this member's default value maybe false or be removed.
 {
-    modeA.gravity = { 0, 0 };
-    modeA.speed = 0;
-    modeA.speedVar = 0;
-    modeA.tangentialAccel = 0;
-    modeA.tangentialAccelVar = 0;
-    modeA.radialAccel = 0;
-    modeA.radialAccelVar = 0;
-    modeA.rotationIsDir = false;
-    modeB.startRadius = 0;
-    modeB.startRadiusVar = 0;
-    modeB.endRadius = 0;
-    modeB.endRadiusVar = 0;
-    modeB.rotatePerSecond = 0;
-    modeB.rotatePerSecondVar = 0;
 }
 
 // implementation ParticleSystem
@@ -163,9 +114,9 @@ void ParticleSystem::addParticles(int count)
     }
 
     //color
-#define SET_COLOR(c, b, v)                                                \
-    for (int i = start; i < _particleCount; ++i)                          \
-    {                                                                     \
+#define SET_COLOR(c, b, v)                                                 \
+    for (int i = start; i < _particleCount; ++i)                           \
+    {                                                                      \
         particle_data_[i].c = clampf(b + v * RANDOM_M11(&RANDSEED), 0, 1); \
     }
 
@@ -179,9 +130,9 @@ void ParticleSystem::addParticles(int count)
     SET_COLOR(deltaColorB, _endColor.b, _endColorVar.b);
     SET_COLOR(deltaColorA, _endColor.a, _endColorVar.a);
 
-#define SET_DELTA_COLOR(c, dc)                                                                          \
-    for (int i = start; i < _particleCount; ++i)                                                        \
-    {                                                                                                   \
+#define SET_DELTA_COLOR(c, dc)                                                                              \
+    for (int i = start; i < _particleCount; ++i)                                                            \
+    {                                                                                                       \
         particle_data_[i].dc = (particle_data_[i].dc - particle_data_[i].c) / particle_data_[i].timeToLive; \
     }
 
