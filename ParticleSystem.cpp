@@ -112,16 +112,15 @@ ParticleSystem::ParticleSystem()
 }
 
 // implementation ParticleSystem
-bool ParticleSystem::init()
-{
-    return initWithTotalParticles(150);
-}
 
 bool ParticleSystem::initWithTotalParticles(int numberOfParticles)
 {
     _totalParticles = numberOfParticles;
 
-    particle_data_.resize(numberOfParticles);
+    if (particle_data_.size() < numberOfParticles)
+    {
+        particle_data_.resize(numberOfParticles);
+    }
     _isActive = true;
     _emitterMode = Mode::GRAVITY;
     _isAutoRemoveOnFinish = false;
@@ -389,13 +388,13 @@ void ParticleSystem::update()
         particle_data_[i].timeToLive -= dt;
     }
 
-    //ÔÙÉú
+    // rebirth
     for (int i = 0; i < _particleCount; ++i)
     {
         if (particle_data_[i].timeToLive <= 0.0f)
         {
             int j = _particleCount - 1;
-            //while (j > 0 && _particleData[i].timeToLive <= 0)
+            //while (j > 0 && particle_data_[i].timeToLive <= 0)
             //{
             //    _particleCount--;
             //    j--;
@@ -441,7 +440,7 @@ void ParticleSystem::update()
             tmp.x = particle_data_[i].modeA.dirX * dt * _yCoordFlipped;
             tmp.y = particle_data_[i].modeA.dirY * dt * _yCoordFlipped;
             particle_data_[i].posx += tmp.x;
-            particle_data_[i].posy -= tmp.y;
+            particle_data_[i].posy += tmp.y;
         }
     }
     else

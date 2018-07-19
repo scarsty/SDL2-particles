@@ -626,7 +626,6 @@ public:
     virtual ~ParticleSystem();
 
     /** initializes a ParticleSystem*/
-    virtual bool init();
     virtual bool initWithTotalParticles(int numberOfParticles);
     virtual bool isPaused() const;
     virtual void pauseEmissions();
