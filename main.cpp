@@ -11,6 +11,10 @@ int main(int, char* argv[])
     p->setRenderer(ren);                   // set the renderer
     p->setPosition(512, 384);              // set the position
     p->setStyle(ParticleExample::FIRE);    // set the example effects
+    p->setStartSpin(0);
+    p->setStartSpinVar(90);
+    p->setEndSpin(90);
+    p->setStartSpinVar(90);
 
     while (1)
     {
@@ -20,6 +24,10 @@ int main(int, char* argv[])
         {
             int s = (e.key.keysym.sym - SDLK_a + 1);
             p->setStyle(ParticleExample::PatticleStyle(s));    // switch the example effects
+        }
+        if (e.type == SDL_QUIT)
+        {
+            break;
         }
 
         SDL_RenderClear(ren);
