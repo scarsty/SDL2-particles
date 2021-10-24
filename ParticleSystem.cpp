@@ -1,7 +1,6 @@
 #include "ParticleSystem.h"
 #include <algorithm>
-#include <assert.h>
-#include <string>
+#include <cmath>
 
 inline float Deg2Rad(float a)
 {
@@ -31,7 +30,7 @@ inline void normalize_point(float x, float y, Pointf* out)
         return;
     }
 
-    n = sqrt(n);
+    n = std::sqrt(n);
     // Too close to zero.
     if (n < 1e-5)
     {
@@ -53,14 +52,13 @@ inline static float RANDOM_M11(unsigned int* seed)
     {
         uint32_t d;
         float f;
-    } u;
+    } u{};
     u.d = (((uint32_t)(*seed) & 0x7fff) << 8) | 0x40000000;
     return u.f - 3.0f;
 }
 
 ParticleSystem::ParticleSystem()
-{
-}
+= default;
 
 // implementation ParticleSystem
 
@@ -86,8 +84,7 @@ void ParticleSystem::resetTotalParticles(int numberOfParticles)
 }
 
 ParticleSystem::~ParticleSystem()
-{
-}
+= default;
 
 void ParticleSystem::addParticles(int count)
 {
@@ -95,7 +92,7 @@ void ParticleSystem::addParticles(int count)
     {
         return;
     }
-    uint32_t RANDSEED = rand();
+    uint32_t RANDSEED = std::rand();
 
     int start = _particleCount;
     _particleCount += count;
@@ -122,18 +119,18 @@ void ParticleSystem::addParticles(int count)
 #define SET_COLOR(c, b, v)                                                 \
     for (int i = start; i < _particleCount; ++i)                           \
     {                                                                      \
-        particle_data_[i].c = clampf(b + v * RANDOM_M11(&RANDSEED), 0, 1); \
+        particle_data_[i].c = clampf((b) + (v) * RANDOM_M11(&RANDSEED), 0, 1); \
     }
 
-    SET_COLOR(colorR, _startColor.r, _startColorVar.r);
-    SET_COLOR(colorG, _startColor.g, _startColorVar.g);
-    SET_COLOR(colorB, _startColor.b, _startColorVar.b);
-    SET_COLOR(colorA, _startColor.a, _startColorVar.a);
+    SET_COLOR(colorR, _startColor.r, _startColorVar.r)
+    SET_COLOR(colorG, _startColor.g, _startColorVar.g)
+    SET_COLOR(colorB, _startColor.b, _startColorVar.b)
+    SET_COLOR(colorA, _startColor.a, _startColorVar.a)
 
-    SET_COLOR(deltaColorR, _endColor.r, _endColorVar.r);
-    SET_COLOR(deltaColorG, _endColor.g, _endColorVar.g);
-    SET_COLOR(deltaColorB, _endColor.b, _endColorVar.b);
-    SET_COLOR(deltaColorA, _endColor.a, _endColorVar.a);
+    SET_COLOR(deltaColorR, _endColor.r, _endColorVar.r)
+    SET_COLOR(deltaColorG, _endColor.g, _endColorVar.g)
+    SET_COLOR(deltaColorB, _endColor.b, _endColorVar.b)
+    SET_COLOR(deltaColorA, _endColor.a, _endColorVar.a)
 
 #define SET_DELTA_COLOR(c, dc)                                                                              \
     for (int i = start; i < _particleCount; ++i)                                                            \
@@ -141,10 +138,10 @@ void ParticleSystem::addParticles(int count)
         particle_data_[i].dc = (particle_data_[i].dc - particle_data_[i].c) / particle_data_[i].timeToLive; \
     }
 
-    SET_DELTA_COLOR(colorR, deltaColorR);
-    SET_DELTA_COLOR(colorG, deltaColorG);
-    SET_DELTA_COLOR(colorB, deltaColorB);
-    SET_DELTA_COLOR(colorA, deltaColorA);
+    SET_DELTA_COLOR(colorR, deltaColorR)
+    SET_DELTA_COLOR(colorG, deltaColorG)
+    SET_DELTA_COLOR(colorB, deltaColorB)
+    SET_DELTA_COLOR(colorA, deltaColorA)
 
     //size
     for (int i = start; i < _particleCount; ++i)
@@ -341,7 +338,7 @@ void ParticleSystem::update()
     {
         if (particle_data_[i].timeToLive <= 0.0f)
         {
-            int j = _particleCount - 1;
+            //int j = _particleCount - 1;
             //while (j > 0 && particle_data_[i].timeToLive <= 0)
             //{
             //    _particleCount--;

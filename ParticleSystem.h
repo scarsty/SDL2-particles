@@ -1,6 +1,6 @@
 #pragma once
 
-//ÒÆÖ²×ÔCocos2dx£¬°æÈ¨ÉùÃ÷Çë²é¿´licensesÎÄ¼ş¼Ğ
+//ç§»æ¤è‡ªCocos2dxï¼Œç‰ˆæƒå£°æ˜è¯·æŸ¥çœ‹licensesæ–‡ä»¶å¤¹
 
 #include "SDL2/SDL.h"
 #include <vector>
@@ -9,13 +9,13 @@
 struct Pointf
 {
 public:
-    Pointf() {}
+    Pointf() = default;
     Pointf(float _x, float _y)
         : x(_x)
         , y(_y)
     {
     }
-    ~Pointf() {}
+    ~Pointf() = default;
     float x = 0, y = 0;
     Pointf operator*(float f)
     {
