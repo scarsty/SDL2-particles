@@ -301,7 +301,7 @@ bool ParticleSystem::isFull()
 void ParticleSystem::update()
 {
     float dt = 1.0 / 25;
-    if (_isActive && _emissionRate)
+    if (_isActive && _emissionRate != 0)
     {
         float rate = 1.0f / _emissionRate;
         int totalParticles = _totalParticles;
@@ -359,7 +359,7 @@ void ParticleSystem::update()
             Pointf tmp, radial = { 0.0f, 0.0f }, tangential;
 
             // radial acceleration
-            if (particle_data_[i].posx || particle_data_[i].posy)
+            if (particle_data_[i].posx != 0 || particle_data_[i].posy != 0)
             {
                 normalize_point(particle_data_[i].posx, particle_data_[i].posy, &radial);
             }
