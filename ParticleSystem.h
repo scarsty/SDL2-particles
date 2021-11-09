@@ -736,12 +736,13 @@ protected:
     float _emissionRate = 0;
     /** maximum particles of the system */
     int _totalParticles = 0;
+
     /** conforms to CocosNodeTexture protocol */
     //BlendFunc _blendFunc;
     /** does the alpha value modify color */
     bool _opacityModifyRGB = false;
     /** does FlippedY variance of each particle */
-    int _yCoordFlipped = 1;
+    float _yCoordFlipped = 1;
 
     /** particles movement type: Free or Grouped
     @since v0.8
@@ -754,6 +755,7 @@ protected:
     /** is sourcePosition compatible */
     bool _sourcePositionCompatible = false;
 
-    int x_ = 0, y_ = 0;
+    float x_ = 0, y_ = 0;
 public:
+    void setPosition(float x, float y) { x_ = x; y_ = y; }
 };

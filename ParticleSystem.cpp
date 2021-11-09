@@ -313,8 +313,8 @@ void ParticleSystem::update()
             }
         }
 
-        int emitCount = (std::min)(1.0f * (totalParticles - _particleCount), _emitCounter / rate);
-        addParticles(emitCount);
+        float emitCount = (std::min)(1.0f * static_cast<float>(totalParticles - _particleCount), _emitCounter / rate);
+        addParticles(static_cast<int>(emitCount));
         _emitCounter -= rate * emitCount;
 
         _elapsed += dt;
