@@ -1,26 +1,22 @@
-# SDL2-particles
+# Cpp-Particle-System
 
-A Particle System ....
+A Particle System than be used in any C++ 17 (or higher) project.
 
-Modified from that of Cocos2dx.
-
-It is a part of kys-cpp (<https://www.github.com/scarsty/kys-cpp>).
-
-## How to use:
-
-@TODO!!!!
-
-
-You can press A ~ K to switch the 11 example effects.
-
-
+Modified from that of Cocos2dx and forked from [SDL2-particles](https://github.com/scarsty/SDL2-particles).
 
 ## Effect Examples
 
 Fire
 
-![fire](https://raw.githubusercontent.com/scarsty/SDL2-particles/master/pic/fire.png)
+![fire](./pic/fire.png)
 
 Snow
 
-![snow](https://raw.githubusercontent.com/scarsty/SDL2-particles/master/pic/snow.png)
+![snow](./pic/snow.png)
+
+## How to use:
+
+**@TODO!!!!**
+
+## LICENSE
+[See the LICENSE file](./LICENSE)
