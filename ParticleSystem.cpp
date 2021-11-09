@@ -642,3 +642,8 @@ void ParticleSystem::resumeEmissions()
 {
     _paused = false;
 }
+
+ParticleData ParticleSystem::getParticleData(std::size_t index)
+{
+	return particle_data_[index];
+}

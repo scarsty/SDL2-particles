@@ -137,6 +137,8 @@ public:
     };
 
 public:
+	ParticleData getParticleData(std::size_t index);
+
     void addParticles(int count);
 
     void stopSystem();
