@@ -16,12 +16,12 @@ public:
     }
     ~Pointf() = default;
     float x = 0, y = 0;
-    Pointf operator*(float f)
+    Pointf operator*(float f) const
     {
         Pointf p{ x * f, y * f };
         return p;
     }
-    float getAngle()
+    float getAngle() const
     {
         return atan2f(y, x);
     }
@@ -147,7 +147,7 @@ public:
      *
      * @return True if the system is full.
      */
-    bool isFull();
+    bool isFull() const;
 
     /** Whether or not the particle system removed self on finish.
      *

@@ -289,7 +289,7 @@ void ParticleSystem::resetSystem()
     }
 }
 
-bool ParticleSystem::isFull()
+bool ParticleSystem::isFull() const
 {
     return (_particleCount == _totalParticles);
 }
