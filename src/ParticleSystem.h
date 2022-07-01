@@ -22,7 +22,7 @@ public:
         Pointf p{ x * f, y * f };
         return p;
     }
-    float getAngle() const
+    [[nodiscard]] float getAngle() const
     {
         return atan2f(y, x);
     }
@@ -150,13 +150,13 @@ public:
      *
      * @return True if the system is full.
      */
-    bool isFull() const;
+    [[nodiscard]] bool isFull() const;
 
     /** Whether or not the particle system removed self on finish.
      *
      * @return True if the particle system removed self on finish.
      */
-    virtual bool isAutoRemoveOnFinish() const;
+    [[nodiscard]] virtual bool isAutoRemoveOnFinish() const;
 
     /** Set the particle system auto removed it self on finish.
      *
@@ -179,7 +179,7 @@ public:
      *
      * @return The speed.
      */
-    virtual float getSpeed() const;
+    [[nodiscard]] virtual float getSpeed() const;
     /** Sets the speed.
      *
      * @param speed The speed.
@@ -189,7 +189,7 @@ public:
      *
      * @return The speed variance.
      */
-    virtual float getSpeedVar() const;
+    [[nodiscard]] virtual float getSpeedVar() const;
     /** Sets the speed variance.
      *
      * @param speed The speed variance.
@@ -199,7 +199,7 @@ public:
      *
      * @return The tangential acceleration.
      */
-    virtual float getTangentialAccel() const;
+    [[nodiscard]] virtual float getTangentialAccel() const;
     /** Sets the tangential acceleration.
      *
      * @param t The tangential acceleration.
@@ -209,7 +209,7 @@ public:
      *
      * @return The tangential acceleration variance.
      */
-    virtual float getTangentialAccelVar() const;
+    [[nodiscard]] virtual float getTangentialAccelVar() const;
     /** Sets the tangential acceleration variance.
      *
      * @param t The tangential acceleration variance.
@@ -219,7 +219,7 @@ public:
      *
      * @return The radial acceleration.
      */
-    virtual float getRadialAccel() const;
+    [[nodiscard]] virtual float getRadialAccel() const;
     /** Sets the radial acceleration.
      *
      * @param t The radial acceleration.
@@ -229,7 +229,7 @@ public:
      *
      * @return The radial acceleration variance.
      */
-    virtual float getRadialAccelVar() const;
+    [[nodiscard]] virtual float getRadialAccelVar() const;
     /** Sets the radial acceleration variance.
      *
      * @param t The radial acceleration variance.
@@ -239,7 +239,7 @@ public:
      *
      * @return True if the rotation is the direction.
      */
-    virtual bool getRotationIsDir() const;
+    [[nodiscard]] virtual bool getRotationIsDir() const;
     /** Sets the rotation of each particle to its direction.
      *
      * @param t True if the rotation is the direction.
@@ -250,7 +250,7 @@ public:
      *
      * @return The start radius.
      */
-    virtual float getStartRadius() const;
+    [[nodiscard]] virtual float getStartRadius() const;
     /** Sets the start radius.
      *
      * @param startRadius The start radius.
@@ -260,7 +260,7 @@ public:
      *
      * @return The start radius variance.
      */
-    virtual float getStartRadiusVar() const;
+    [[nodiscard]] virtual float getStartRadiusVar() const;
     /** Sets the start radius variance.
      *
      * @param startRadiusVar The start radius variance.
@@ -270,7 +270,7 @@ public:
      *
      * @return The end radius.
      */
-    virtual float getEndRadius() const;
+    [[nodiscard]] virtual float getEndRadius() const;
     /** Sets the end radius.
      *
      * @param endRadius The end radius.
@@ -280,7 +280,7 @@ public:
      *
      * @return The end radius variance.
      */
-    virtual float getEndRadiusVar() const;
+    [[nodiscard]] virtual float getEndRadiusVar() const;
     /** Sets the end radius variance.
      *
      * @param endRadiusVar The end radius variance.
@@ -290,7 +290,7 @@ public:
      *
      * @return The number of degrees to rotate a particle around the source pos per second.
      */
-    virtual float getRotatePerSecond() const;
+    [[nodiscard]] virtual float getRotatePerSecond() const;
     /** Sets the number of degrees to rotate a particle around the source pos per second.
      *
      * @param degrees The number of degrees to rotate a particle around the source pos per second.
@@ -300,7 +300,7 @@ public:
      *
      * @return The rotate per second variance.
      */
-    virtual float getRotatePerSecondVar() const;
+    [[nodiscard]] virtual float getRotatePerSecondVar() const;
     /** Sets the rotate per second variance.
      *
      * @param degrees The rotate per second variance.
@@ -316,13 +316,13 @@ public:
      *
      * @return True if the particle system is active.
      */
-    virtual bool isActive() const;
+    [[nodiscard]] virtual bool isActive() const;
 
     /** Gets the index of system in batch node array.
      *
      * @return The index of system in batch node array.
      */
-    int getAtlasIndex() const { return _atlasIndex; }
+    [[nodiscard]] int getAtlasIndex() const { return _atlasIndex; }
     /** Sets the index of system in batch node array.
      *
      * @param index The index of system in batch node array.
@@ -333,13 +333,13 @@ public:
      *
      * @return The Quantity of particles that are being simulated at the moment.
      */
-    unsigned int getParticleCount() const { return _particleCount; }
+    [[nodiscard]] unsigned int getParticleCount() const { return _particleCount; }
 
     /** Gets how many seconds the emitter will run. -1 means 'forever'.
      *
      * @return The seconds that the emitter will run. -1 means 'forever'.
      */
-    float getDuration() const { return _duration; }
+    [[nodiscard]] float getDuration() const { return _duration; }
     /** Sets how many seconds the emitter will run. -1 means 'forever'.
      *
      * @param duration The seconds that the emitter will run. -1 means 'forever'.
@@ -350,7 +350,7 @@ public:
      *
      * @return The source position of the emitter.
      */
-    const Vec2& getSourcePosition() const { return _sourcePosition; }
+    [[nodiscard]] const Vec2& getSourcePosition() const { return _sourcePosition; }
     /** Sets the source position of the emitter.
      *
      * @param pos The source position of the emitter.
@@ -361,7 +361,7 @@ public:
      *
      * @return The position variance of the emitter.
      */
-    const Vec2& getPosVar() const { return _posVar; }
+    [[nodiscard]] const Vec2& getPosVar() const { return _posVar; }
     /** Sets the position variance of the emitter.
      *
      * @param pos The position variance of the emitter.
@@ -372,7 +372,7 @@ public:
      *
      * @return The life of each particle.
      */
-    float getLife() const { return _life; }
+    [[nodiscard]] float getLife() const { return _life; }
     /** Sets the life of each particle.
      *
      * @param life The life of each particle.
@@ -383,7 +383,7 @@ public:
      *
      * @return The life variance of each particle.
      */
-    float getLifeVar() const { return _lifeVar; }
+    [[nodiscard]] float getLifeVar() const { return _lifeVar; }
     /** Sets the life variance of each particle.
      *
      * @param lifeVar The life variance of each particle.
@@ -394,7 +394,7 @@ public:
      *
      * @return The angle of each particle.
      */
-    float getAngle() const { return _angle; }
+    [[nodiscard]] float getAngle() const { return _angle; }
     /** Sets the angle of each particle.
      *
      * @param angle The angle of each particle.
@@ -405,7 +405,7 @@ public:
      *
      * @return The angle variance of each particle.
      */
-    float getAngleVar() const { return _angleVar; }
+    [[nodiscard]] float getAngleVar() const { return _angleVar; }
     /** Sets the angle variance of each particle.
      *
      * @param angleVar The angle variance of each particle.
@@ -418,7 +418,7 @@ public:
      *
      * @return The mode of the emitter.
      */
-    Mode getEmitterMode() const { return _emitterMode; }
+    [[nodiscard]] Mode getEmitterMode() const { return _emitterMode; }
     /** Sets the mode of the emitter.
      *
      * @param mode The mode of the emitter.
@@ -429,7 +429,7 @@ public:
      *
      * @return The start size in pixels of each particle.
      */
-    float getStartSize() const { return _startSize; }
+    [[nodiscard]] float getStartSize() const { return _startSize; }
     /** Sets the start size in pixels of each particle.
      *
      * @param startSize The start size in pixels of each particle.
@@ -440,7 +440,7 @@ public:
      *
      * @return The start size variance in pixels of each particle.
      */
-    float getStartSizeVar() const { return _startSizeVar; }
+    [[nodiscard]] float getStartSizeVar() const { return _startSizeVar; }
     /** Sets the start size variance in pixels of each particle.
      *
      * @param sizeVar The start size variance in pixels of each particle.
@@ -451,7 +451,7 @@ public:
      *
      * @return The end size in pixels of each particle.
      */
-    float getEndSize() const { return _endSize; }
+    [[nodiscard]] float getEndSize() const { return _endSize; }
     /** Sets the end size in pixels of each particle.
      *
      * @param endSize The end size in pixels of each particle.
@@ -462,7 +462,7 @@ public:
      *
      * @return The end size variance in pixels of each particle.
      */
-    float getEndSizeVar() const { return _endSizeVar; }
+    [[nodiscard]] float getEndSizeVar() const { return _endSizeVar; }
     /** Sets the end size variance in pixels of each particle.
      *
      * @param sizeVar The end size variance in pixels of each particle.
@@ -473,7 +473,7 @@ public:
      *
      * @return The start color of each particle.
      */
-    const Color4F& getStartColor() const { return _startColor; }
+    [[nodiscard]] const Color4F& getStartColor() const { return _startColor; }
     /** Sets the start color of each particle.
      *
      * @param color The start color of each particle.
@@ -484,7 +484,7 @@ public:
      *
      * @return The start color variance of each particle.
      */
-    const Color4F& getStartColorVar() const { return _startColorVar; }
+    [[nodiscard]] const Color4F& getStartColorVar() const { return _startColorVar; }
     /** Sets the start color variance of each particle.
      *
      * @param color The start color variance of each particle.
@@ -495,7 +495,7 @@ public:
      *
      * @return The end color and end color variation of each particle.
      */
-    const Color4F& getEndColor() const { return _endColor; }
+    [[nodiscard]] const Color4F& getEndColor() const { return _endColor; }
     /** Sets the end color and end color variation of each particle.
      *
      * @param color The end color and end color variation of each particle.
@@ -506,7 +506,7 @@ public:
      *
      * @return The end color variance of each particle.
      */
-    const Color4F& getEndColorVar() const { return _endColorVar; }
+    [[nodiscard]] const Color4F& getEndColorVar() const { return _endColorVar; }
     /** Sets the end color variance of each particle.
      *
      * @param color The end color variance of each particle.
@@ -517,7 +517,7 @@ public:
      *
      * @return The start spin of each particle.
      */
-    float getStartSpin() const { return _startSpin; }
+    [[nodiscard]] float getStartSpin() const { return _startSpin; }
     /** Sets the start spin of each particle.
      *
      * @param spin The start spin of each particle.
@@ -528,7 +528,7 @@ public:
      *
      * @return The start spin variance of each particle.
      */
-    float getStartSpinVar() const { return _startSpinVar; }
+    [[nodiscard]] float getStartSpinVar() const { return _startSpinVar; }
     /** Sets the start spin variance of each particle.
      *
      * @param pinVar The start spin variance of each particle.
@@ -539,7 +539,7 @@ public:
      *
      * @return The end spin of each particle.
      */
-    float getEndSpin() const { return _endSpin; }
+    [[nodiscard]] float getEndSpin() const { return _endSpin; }
     /** Sets the end spin of each particle.
      *
      * @param endSpin The end spin of each particle.
@@ -550,7 +550,7 @@ public:
      *
      * @return The end spin variance of each particle.
      */
-    float getEndSpinVar() const { return _endSpinVar; }
+    [[nodiscard]] float getEndSpinVar() const { return _endSpinVar; }
     /** Sets the end spin variance of each particle.
      *
      * @param endSpinVar The end spin variance of each particle.
@@ -561,7 +561,7 @@ public:
      *
      * @return The emission rate of the particles.
      */
-    float getEmissionRate() const { return _emissionRate; }
+    [[nodiscard]] float getEmissionRate() const { return _emissionRate; }
     /** Sets the emission rate of the particles.
      *
      * @param rate The emission rate of the particles.
@@ -572,7 +572,7 @@ public:
      *
      * @return The maximum particles of the system.
      */
-    virtual int getTotalParticles() const;
+    [[nodiscard]] virtual int getTotalParticles() const;
     /** Sets the maximum particles of the system.
      *
      * @param totalParticles The maximum particles of the system.
@@ -581,7 +581,7 @@ public:
 
     /** does the alpha value modify color */
     void setOpacityModifyRgb(bool opacityModifyRgb) { _opacityModifyRGB = opacityModifyRgb; }
-    bool isOpacityModifyRgb() const { return _opacityModifyRGB; }
+    [[nodiscard]] bool isOpacityModifyRgb() const { return _opacityModifyRGB; }
 
 	void update();
 
@@ -591,7 +591,7 @@ public:
     /** initializes a ParticleSystem*/
     virtual bool initWithTotalParticles(int numberOfParticles);
     virtual void resetTotalParticles(int numberOfParticles);
-    virtual bool isPaused() const;
+    [[nodiscard]] virtual bool isPaused() const;
     virtual void pauseEmissions();
     virtual void resumeEmissions();
 
