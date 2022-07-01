@@ -12,7 +12,7 @@ Fire
 
 Snow
 
-![snow](./pic/snow.png)
+![snow](examples/sdl2/assets/snow.png)
 
 ## How to use:
 
