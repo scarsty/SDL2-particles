@@ -45,7 +45,7 @@ inline void normalizePoint(float x, float y, Pointf* out)
 /**
 A more effect random number getter function, get from ejoy2d.
 */
-inline static float RANDOM_M11(unsigned int* seed)
+inline static float randomM11(unsigned int* seed)
 {
     *seed = *seed * 134775813 + 1;
     union
@@ -92,7 +92,7 @@ void ParticleSystem::addParticles(int count)
     {
         return;
     }
-    uint32_t RANDSEED = std::rand();
+    uint32_t randseed = std::rand();
 
     int start = _particleCount;
     _particleCount += count;
@@ -100,37 +100,37 @@ void ParticleSystem::addParticles(int count)
     //life
     for (int i = start; i < _particleCount; ++i)
     {
-        float theLife = _life + _lifeVar * RANDOM_M11(&RANDSEED);
+        float theLife = _life + _lifeVar * randomM11(&randseed);
         particle_data_[i].timeToLive = (std::max)(0.0f, theLife);
     }
 
     //position
     for (int i = start; i < _particleCount; ++i)
     {
-        particle_data_[i].posx = _sourcePosition.x + _posVar.x * RANDOM_M11(&RANDSEED);
+        particle_data_[i].posx = _sourcePosition.x + _posVar.x * randomM11(&randseed);
     }
 
     for (int i = start; i < _particleCount; ++i)
     {
-        particle_data_[i].posy = _sourcePosition.y + _posVar.y * RANDOM_M11(&RANDSEED);
+        particle_data_[i].posy = _sourcePosition.y + _posVar.y * randomM11(&randseed);
     }
 
     //color
 #define SET_COLOR(c, b, v)                                                 \
     for (int i = start; i < _particleCount; ++i)                           \
     {                                                                      \
-        particle_data_[i].c = clampf((b) + (v) * RANDOM_M11(&RANDSEED), 0, 1); \
+        particle_data_[i].c = clampf((b) + (v) * randomM11(&randseed), 0, 1); \
     }
 
-    SET_COLOR(colorR, _startColor.r, _startColorVar.r)
-    SET_COLOR(colorG, _startColor.g, _startColorVar.g)
-    SET_COLOR(colorB, _startColor.b, _startColorVar.b)
-    SET_COLOR(colorA, _startColor.a, _startColorVar.a)
+	SET_COLOR(colorR, _startColor.r, _startColorVar.r)
+	SET_COLOR(colorG, _startColor.g, _startColorVar.g)
+	SET_COLOR(colorB, _startColor.b, _startColorVar.b)
+	SET_COLOR(colorA, _startColor.a, _startColorVar.a)
 
-    SET_COLOR(deltaColorR, _endColor.r, _endColorVar.r)
-    SET_COLOR(deltaColorG, _endColor.g, _endColorVar.g)
-    SET_COLOR(deltaColorB, _endColor.b, _endColorVar.b)
-    SET_COLOR(deltaColorA, _endColor.a, _endColorVar.a)
+	SET_COLOR(deltaColorR, _endColor.r, _endColorVar.r)
+	SET_COLOR(deltaColorG, _endColor.g, _endColorVar.g)
+	SET_COLOR(deltaColorB, _endColor.b, _endColorVar.b)
+	SET_COLOR(deltaColorA, _endColor.a, _endColorVar.a)
 
 #define SET_DELTA_COLOR(c, dc)                                                                              \
     for (int i = start; i < _particleCount; ++i)                                                            \
@@ -146,7 +146,7 @@ void ParticleSystem::addParticles(int count)
     //size
     for (int i = start; i < _particleCount; ++i)
     {
-        particle_data_[i].size = _startSize + _startSizeVar * RANDOM_M11(&RANDSEED);
+        particle_data_[i].size = _startSize + _startSizeVar * randomM11(&randseed);
         particle_data_[i].size = (std::max)(0.0f, particle_data_[i].size);
     }
 
@@ -154,7 +154,7 @@ void ParticleSystem::addParticles(int count)
     {
         for (int i = start; i < _particleCount; ++i)
         {
-            float endSize = _endSize + _endSizeVar * RANDOM_M11(&RANDSEED);
+            float endSize = _endSize + _endSizeVar * randomM11(&randseed);
             endSize = (std::max)(0.0f, endSize);
             particle_data_[i].deltaSize = (endSize - particle_data_[i].size) / particle_data_[i].timeToLive;
         }
@@ -170,11 +170,11 @@ void ParticleSystem::addParticles(int count)
     // rotation
     for (int i = start; i < _particleCount; ++i)
     {
-        particle_data_[i].rotation = _startSpin + _startSpinVar * RANDOM_M11(&RANDSEED);
+        particle_data_[i].rotation = _startSpin + _startSpinVar * randomM11(&randseed);
     }
     for (int i = start; i < _particleCount; ++i)
     {
-        float endA = _endSpin + _endSpinVar * RANDOM_M11(&RANDSEED);
+        float endA = _endSpin + _endSpinVar * randomM11(&randseed);
         particle_data_[i].deltaRotation = (endA - particle_data_[i].rotation) / particle_data_[i].timeToLive;
     }
 
@@ -199,13 +199,13 @@ void ParticleSystem::addParticles(int count)
         // radial accel
         for (int i = start; i < _particleCount; ++i)
         {
-            particle_data_[i].modeA.radialAccel = modeA.radialAccel + modeA.radialAccelVar * RANDOM_M11(&RANDSEED);
+            particle_data_[i].modeA.radialAccel = modeA.radialAccel + modeA.radialAccelVar * randomM11(&randseed);
         }
 
         // tangential accel
         for (int i = start; i < _particleCount; ++i)
         {
-            particle_data_[i].modeA.tangentialAccel = modeA.tangentialAccel + modeA.tangentialAccelVar * RANDOM_M11(&RANDSEED);
+            particle_data_[i].modeA.tangentialAccel = modeA.tangentialAccel + modeA.tangentialAccelVar * randomM11(&randseed);
         }
 
         // rotation is dir
@@ -213,9 +213,9 @@ void ParticleSystem::addParticles(int count)
         {
             for (int i = start; i < _particleCount; ++i)
             {
-                float a = deg2Rad(_angle + _angleVar * RANDOM_M11(&RANDSEED));
+                float a = deg2Rad(_angle + _angleVar * randomM11(&randseed));
                 Vec2 v(cosf(a), sinf(a));
-                float s = modeA.speed + modeA.speedVar * RANDOM_M11(&RANDSEED);
+                float s = modeA.speed + modeA.speedVar * randomM11(&randseed);
                 Vec2 dir = v * s;
                 particle_data_[i].modeA.dirX = dir.x;    //v * s ;
                 particle_data_[i].modeA.dirY = dir.y;
@@ -226,9 +226,9 @@ void ParticleSystem::addParticles(int count)
         {
             for (int i = start; i < _particleCount; ++i)
             {
-                float a = deg2Rad(_angle + _angleVar * RANDOM_M11(&RANDSEED));
+                float a = deg2Rad(_angle + _angleVar * randomM11(&randseed));
                 Vec2 v(cosf(a), sinf(a));
-                float s = modeA.speed + modeA.speedVar * RANDOM_M11(&RANDSEED);
+                float s = modeA.speed + modeA.speedVar * randomM11(&randseed);
                 Vec2 dir = v * s;
                 particle_data_[i].modeA.dirX = dir.x;    //v * s ;
                 particle_data_[i].modeA.dirY = dir.y;
@@ -241,18 +241,18 @@ void ParticleSystem::addParticles(int count)
     {
         for (int i = start; i < _particleCount; ++i)
         {
-            particle_data_[i].modeB.radius = modeB.startRadius + modeB.startRadiusVar * RANDOM_M11(&RANDSEED);
+            particle_data_[i].modeB.radius = modeB.startRadius + modeB.startRadiusVar * randomM11(&randseed);
         }
 
         for (int i = start; i < _particleCount; ++i)
         {
-            particle_data_[i].modeB.angle = deg2Rad(_angle + _angleVar * RANDOM_M11(&RANDSEED));
+            particle_data_[i].modeB.angle = deg2Rad(_angle + _angleVar * randomM11(&randseed));
         }
 
         for (int i = start; i < _particleCount; ++i)
         {
             particle_data_[i].modeB.degreesPerSecond =
-				deg2Rad(modeB.rotatePerSecond + modeB.rotatePerSecondVar * RANDOM_M11(&RANDSEED));
+				deg2Rad(modeB.rotatePerSecond + modeB.rotatePerSecondVar * randomM11(&randseed));
         }
 
         if (modeB.endRadius == START_RADIUS_EQUAL_TO_END_RADIUS)
@@ -266,7 +266,7 @@ void ParticleSystem::addParticles(int count)
         {
             for (int i = start; i < _particleCount; ++i)
             {
-                float endRadius = modeB.endRadius + modeB.endRadiusVar * RANDOM_M11(&RANDSEED);
+                float endRadius = modeB.endRadius + modeB.endRadiusVar * randomM11(&randseed);
                 particle_data_[i].modeB.deltaRadius = (endRadius - particle_data_[i].modeB.radius) / particle_data_[i].timeToLive;
             }
         }
