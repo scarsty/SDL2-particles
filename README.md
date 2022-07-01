@@ -6,6 +6,8 @@ Modified from that of Cocos2dx and forked from [SDL2-particles](https://github.c
 
 ## Effect Examples
 
+//TODO add gifs
+
 Fire
 
 ![fire](./pic/fire.png)
