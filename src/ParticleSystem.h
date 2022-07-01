@@ -580,8 +580,8 @@ public:
     virtual void setTotalParticles(int totalParticles);
 
     /** does the alpha value modify color */
-    void setOpacityModifyRGB(bool opacityModifyRGB) { _opacityModifyRGB = opacityModifyRGB; }
-    bool isOpacityModifyRGB() const { return _opacityModifyRGB; }
+    void setOpacityModifyRgb(bool opacityModifyRgb) { _opacityModifyRGB = opacityModifyRgb; }
+    bool isOpacityModifyRgb() const { return _opacityModifyRGB; }
 
 	void update();
 

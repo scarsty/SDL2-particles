@@ -2,26 +2,26 @@
 #include <algorithm>
 #include <cmath>
 
-inline float Deg2Rad(float a)
+inline float deg2Rad(float a)
 {
     return a * 0.01745329252f;
 }
 
-inline float Rad2Deg(float a)
+inline float rad2Deg(float a)
 {
     return a * 57.29577951f;
 }
 
-inline float clampf(float value, float min_inclusive, float max_inclusive)
+inline float clampf(float value, float minInclusive, float maxInclusive)
 {
-    if (min_inclusive > max_inclusive)
+    if (minInclusive > maxInclusive)
     {
-        std::swap(min_inclusive, max_inclusive);
+        std::swap(minInclusive, maxInclusive);
     }
-    return value < min_inclusive ? min_inclusive : value < max_inclusive ? value : max_inclusive;
+    return value < minInclusive ? minInclusive : value < maxInclusive ? value : maxInclusive;
 }
 
-inline void normalize_point(float x, float y, Pointf* out)
+inline void normalizePoint(float x, float y, Pointf* out)
 {
     float n = x * x + y * y;
     // Already normalized.
@@ -213,20 +213,20 @@ void ParticleSystem::addParticles(int count)
         {
             for (int i = start; i < _particleCount; ++i)
             {
-                float a = Deg2Rad(_angle + _angleVar * RANDOM_M11(&RANDSEED));
+                float a = deg2Rad(_angle + _angleVar * RANDOM_M11(&RANDSEED));
                 Vec2 v(cosf(a), sinf(a));
                 float s = modeA.speed + modeA.speedVar * RANDOM_M11(&RANDSEED);
                 Vec2 dir = v * s;
                 particle_data_[i].modeA.dirX = dir.x;    //v * s ;
                 particle_data_[i].modeA.dirY = dir.y;
-                particle_data_[i].rotation = -Rad2Deg(dir.getAngle());
+                particle_data_[i].rotation = -rad2Deg(dir.getAngle());
             }
         }
         else
         {
             for (int i = start; i < _particleCount; ++i)
             {
-                float a = Deg2Rad(_angle + _angleVar * RANDOM_M11(&RANDSEED));
+                float a = deg2Rad(_angle + _angleVar * RANDOM_M11(&RANDSEED));
                 Vec2 v(cosf(a), sinf(a));
                 float s = modeA.speed + modeA.speedVar * RANDOM_M11(&RANDSEED);
                 Vec2 dir = v * s;
@@ -246,12 +246,13 @@ void ParticleSystem::addParticles(int count)
 
         for (int i = start; i < _particleCount; ++i)
         {
-            particle_data_[i].modeB.angle = Deg2Rad(_angle + _angleVar * RANDOM_M11(&RANDSEED));
+            particle_data_[i].modeB.angle = deg2Rad(_angle + _angleVar * RANDOM_M11(&RANDSEED));
         }
 
         for (int i = start; i < _particleCount; ++i)
         {
-            particle_data_[i].modeB.degreesPerSecond = Deg2Rad(modeB.rotatePerSecond + modeB.rotatePerSecondVar * RANDOM_M11(&RANDSEED));
+            particle_data_[i].modeB.degreesPerSecond =
+				deg2Rad(modeB.rotatePerSecond + modeB.rotatePerSecondVar * RANDOM_M11(&RANDSEED));
         }
 
         if (modeB.endRadius == START_RADIUS_EQUAL_TO_END_RADIUS)
@@ -358,7 +359,7 @@ void ParticleSystem::update()
             // radial acceleration
             if (particle_data_[i].posx != 0 || particle_data_[i].posy != 0)
             {
-                normalize_point(particle_data_[i].posx, particle_data_[i].posy, &radial);
+				normalizePoint(particle_data_[i].posx, particle_data_[i].posy, &radial);
             }
             tangential = radial;
             radial.x *= particle_data_[i].modeA.radialAccel;
