@@ -67,29 +67,64 @@ bool DemoApplication::initialise(int screenWidth, int screenHeight)
 
 void DemoApplication::execute()
 {
-	if (!_isInitialised) {
+	if (!_isInitialised)
+	{
 		throw std::exception("DemoApplication is not initialised.");
 	}
 
-	bool mExit{ false };
-	SDL_Event mEvent{};
-	
-	ParticleObject snowObject{_sdlRenderer, "assets/bigStar.png", ParticleObject::ParticleStyle::SNOW, _screenWidth / 2, _screenHeight / 2};
+	bool quitApplication{ false };
+	SDL_Event sdlEvent{};
 
-	while (!mExit)
+	ParticleObject snowParticles
+		{ _sdlRenderer, "assets/bigStar.png", ParticleObject::ParticleStyle::SNOW, _screenWidth / 2,
+		  _screenHeight / 2 };
+	ParticleObject fireParticles
+		{ _sdlRenderer, "assets/fire.png", ParticleObject::ParticleStyle::FIRE, _screenWidth / 2, _screenHeight / 2 };
+
+	size_t index{ 0 };
+	size_t amount{ 2 };
+
+	while (!quitApplication)
 	{
-		while (SDL_PollEvent(&mEvent) != 0)
+		while (SDL_PollEvent(&sdlEvent) != 0)
 		{
 			SDL_PumpEvents();
 
-			if (mEvent.type == SDL_QUIT)
+			switch (sdlEvent.type)
 			{
-				mExit = true;
+			case SDL_QUIT:
+			{
+				quitApplication = true;
+				break;
+			}
+			case SDL_MOUSEBUTTONDOWN:
+			{
+				if (sdlEvent.button.button == SDL_BUTTON_LEFT || SDL_BUTTON_RIGHT)
+				{
+					index++;
+					if (index >= amount)
+					{
+						index = 0;
+					}
+				}
+			}
+			default:
+				break;
 			}
 		}
 		SDL_RenderClear(_sdlRenderer);
 
-		snowObject.draw();
+		switch (index)
+		{
+		case 0:
+			fireParticles.draw();
+			break;
+		case 1:
+			snowParticles.draw();
+			break;
+		default:
+			break;
+		}
 
 		SDL_RenderPresent(_sdlRenderer);
 		SDL_Delay(10);

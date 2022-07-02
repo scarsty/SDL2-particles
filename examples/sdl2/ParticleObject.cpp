@@ -111,6 +111,53 @@ void ParticleObject::setStyle(ParticleStyle style)
 		_particleSystem.setPosVar({ 1.0f * 300, 0.0f });
 		break;
 	}
+	case FIRE: {
+		int totalParticles{250};
+		_particleSystem.initWithTotalParticles(totalParticles);
+
+        // duration
+		_particleSystem.setDuration(ParticleSystem::DURATION_INFINITY);
+
+        // Gravity Mode
+		_particleSystem.setEmitterMode(ParticleSystem::Mode::GRAVITY);
+
+        // Gravity Mode: gravity
+		_particleSystem.setGravity(Vec2(0, 0));
+
+		// Gravity Mode: radial acceleration
+		_particleSystem.setRadialAccel(0) ;
+		_particleSystem.setRadialAccelVar(0);
+
+        // Gravity Mode: speed of particles
+		_particleSystem.setSpeed(-60);
+		_particleSystem.setSpeedVar(20);
+
+        // starting angle
+		_particleSystem.setAngle(90);
+		_particleSystem.setAngle(10);
+
+        // life of particles
+		float life{3};
+		_particleSystem.setLife(life);
+		_particleSystem.setLifeVar(0.25f);
+
+        // size, in pixels
+		_particleSystem.setStartSize(54.0f);
+		_particleSystem.setStartSizeVar(10.0f);
+		_particleSystem.setEndSize(ParticleSystem::START_SIZE_EQUAL_TO_END_SIZE);
+
+        // emits per frame
+		_particleSystem.setEmissionRate(static_cast<float>(totalParticles) / life);
+
+        // color of particles
+		_particleSystem.setStartColor({ 0.76f,  0.25f,  0.12f, 1.0f });
+		_particleSystem.setStartColorVar({ 0.0f, 0.0f, 0.0f, 0.0f });
+		_particleSystem.setEndColor({ 0.0f, 0.0f, 0.0f, 0.0f });
+		_particleSystem.setEndColorVar({ 0.0f, 0.0f, 0.0f, 0.0f });
+
+		_particleSystem.setPosVar({40.0f, 20.0f});
+		break;
+	}
 	default:
 		break;
 	}
