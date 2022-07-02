@@ -1,9 +1,12 @@
-#include <ParticleSystem.h>
 #include "SDL.h"
+#include "DemoApplication.h"
 
-int main(int argc, char* argv[]) {
-	//TODO create example
-	SDL_Rect ok = SDL_Rect();
-	Pointf test = Pointf(3, 3);
+int main(int, [[maybe_unused]] char* argv[]) {
+	DemoApplication application = DemoApplication();
+
+	application.initialise(1024, 768);
+	application.execute();
+	application.shutdown();
+
 	return 0;
 }
