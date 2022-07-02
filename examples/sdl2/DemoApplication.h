@@ -10,9 +10,10 @@ class DemoApplication
 	void shutdown();
 
  private:
-	SDL_Window* _sdlWindow;
-	SDL_Renderer* _sdlRenderer;
-	SDL_Surface* _sldScreenSurface;
+	SDL_Window* _sdlWindow { nullptr };
+	SDL_Renderer* _sdlRenderer { nullptr };
+	SDL_Surface* _sldScreenSurface { nullptr };
+	bool _isInitialised { false };
 };
 
 #endif //CPP_PARTICLE_SYSTEM_EXAMPLES_SDL2_DEMOAPPLICATION_H_

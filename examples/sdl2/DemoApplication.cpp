@@ -3,6 +3,11 @@
 
 bool DemoApplication::initialise(int screenWidth, int screenHeight)
 {
+	if (_isInitialised)
+	{
+		return true;
+	}
+
 	if (SDL_Init(SDL_INIT_VIDEO) < 0)
 	{
 		printf("Could not initialize SDL. SDL_Error: %s\n", SDL_GetError());
@@ -32,9 +37,9 @@ bool DemoApplication::initialise(int screenWidth, int screenHeight)
 			}
 
 			//Initialize PNG loading
-			if( !( IMG_Init( IMG_INIT_PNG ) & IMG_INIT_PNG ) )
+			if (!(IMG_Init(IMG_INIT_PNG) & IMG_INIT_PNG))
 			{
-				printf( "SDL_image could not be initialized. SDL_image Error: %s\n", IMG_GetError() );
+				printf("SDL_image could not be initialized. SDL_image Error: %s\n", IMG_GetError());
 				return false;
 			}
 
@@ -49,6 +54,8 @@ bool DemoApplication::initialise(int screenWidth, int screenHeight)
 
 		}
 	}
+
+	_isInitialised = true;
 	return true;
 }
 
@@ -60,23 +67,27 @@ void DemoApplication::execute()
 
 void DemoApplication::shutdown()
 {
-	if (_sldScreenSurface)
+	if (_isInitialised)
 	{
-		SDL_FreeSurface(_sldScreenSurface);
-		_sldScreenSurface = nullptr;
-	}
+		if (_sldScreenSurface)
+		{
+			SDL_FreeSurface(_sldScreenSurface);
+			_sldScreenSurface = nullptr;
+		}
 
-	if (_sdlRenderer)
-	{
-		SDL_DestroyRenderer(_sdlRenderer);
-		_sdlRenderer = nullptr;
-	}
+		if (_sdlRenderer)
+		{
+			SDL_DestroyRenderer(_sdlRenderer);
+			_sdlRenderer = nullptr;
+		}
 
-	if (_sdlWindow)
-	{
-		SDL_DestroyWindow(_sdlWindow);
-		_sdlWindow = nullptr;
-	}
+		if (_sdlWindow)
+		{
+			SDL_DestroyWindow(_sdlWindow);
+			_sdlWindow = nullptr;
+		}
 
-	SDL_Quit();
+		SDL_Quit();
+		_isInitialised = false;
+	}
 }
