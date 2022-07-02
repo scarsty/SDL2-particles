@@ -1,5 +1,7 @@
 #include "DemoApplication.h"
+#include "ParticleObject.h"
 #include <SDL_image.h>
+#include <exception>
 
 bool DemoApplication::initialise(int screenWidth, int screenHeight)
 {
@@ -15,6 +17,9 @@ bool DemoApplication::initialise(int screenWidth, int screenHeight)
 	}
 	else
 	{
+		_screenWidth = screenWidth;
+		_screenHeight = screenHeight;
+
 		_sdlWindow = SDL_CreateWindow("SDL Test",
 			SDL_WINDOWPOS_UNDEFINED,
 			SDL_WINDOWPOS_UNDEFINED,
@@ -23,6 +28,7 @@ bool DemoApplication::initialise(int screenWidth, int screenHeight)
 			SDL_WINDOW_SHOWN);
 		if (_sdlWindow == nullptr)
 		{
+			printf("Window could not be initialized. SDL_Error: %s\n", SDL_GetError());
 			printf("Window could not be initialized. SDL_Error: %s\n", SDL_GetError());
 			return false;
 		}
@@ -61,8 +67,33 @@ bool DemoApplication::initialise(int screenWidth, int screenHeight)
 
 void DemoApplication::execute()
 {
-	//TODO afmaken
+	if (!_isInitialised) {
+		throw std::exception("DemoApplication is not initialised.");
+	}
 
+	bool mExit{ false };
+	SDL_Event mEvent{};
+	
+	ParticleObject snowObject{_sdlRenderer, "assets/bigStar.png", ParticleObject::ParticleStyle::SNOW, _screenWidth / 2, _screenHeight / 2};
+
+	while (!mExit)
+	{
+		while (SDL_PollEvent(&mEvent) != 0)
+		{
+			SDL_PumpEvents();
+
+			if (mEvent.type == SDL_QUIT)
+			{
+				mExit = true;
+			}
+		}
+		SDL_RenderClear(_sdlRenderer);
+
+		snowObject.draw();
+
+		SDL_RenderPresent(_sdlRenderer);
+		SDL_Delay(10);
+	}
 }
 
 void DemoApplication::shutdown()
