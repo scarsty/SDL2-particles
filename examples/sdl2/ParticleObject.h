@@ -14,6 +14,7 @@ class ParticleObject
 		NONE,
 		SNOW,
 		FIRE,
+		FIREWORK,
 	};
 
 	ParticleObject(SDL_Renderer* renderer, const char* texturePath, ParticleStyle style, int positionX, int positionY);
