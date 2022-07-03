@@ -639,3 +639,233 @@ int ParticleSystem::getAtlasIndex() const
 {
 	return _atlasIndex;
 }
+
+unsigned int ParticleSystem::getParticleCount() const
+{
+	return _particleCount;
+}
+
+float ParticleSystem::getDuration() const
+{
+	return _duration;
+}
+
+float ParticleSystem::getEmissionRate() const
+{
+	return _emissionRate;
+}
+
+void ParticleSystem::setEmissionRate(float rate)
+{
+	_emissionRate = rate;
+}
+
+bool ParticleSystem::isOpacityModifyRgb() const
+{
+	return _opacityModifyRgb;
+}
+
+void ParticleSystem::setOpacityModifyRgb(bool opacityModifyRgb)
+{
+	_opacityModifyRgb = opacityModifyRgb;
+}
+
+void ParticleSystem::setEndSpinVar(float endSpinVar)
+{
+	_endSpinVar = endSpinVar;
+}
+
+float ParticleSystem::getEndSpinVar() const
+{
+	return _endSpinVar;
+}
+
+float ParticleSystem::getStartSpinVar() const
+{
+	return _startSpinVar;
+}
+
+void ParticleSystem::setStartSpin(float spin)
+{
+	_startSpin = spin;
+}
+
+float ParticleSystem::getStartSpin() const
+{
+	return _startSpin;
+}
+
+void ParticleSystem::setEndColorVar(const Color4F& color)
+{
+	_endColorVar = color;
+}
+
+const Color4F& ParticleSystem::getEndColorVar() const
+{
+	return _endColorVar;
+}
+
+void ParticleSystem::setEndColor(const Color4F& color)
+{
+	_endColor = color;
+}
+
+const Color4F& ParticleSystem::getEndColor() const
+{
+	return _endColor;
+}
+
+void ParticleSystem::setStartColorVar(const Color4F& color)
+{
+	_startColorVar = color;
+}
+
+const Color4F& ParticleSystem::getStartColorVar() const
+{
+	return _startColorVar;
+}
+
+void ParticleSystem::setStartColor(const Color4F& color)
+{
+	_startColor = color;
+}
+
+const Color4F& ParticleSystem::getStartColor() const
+{
+	return _startColor;
+}
+
+float ParticleSystem::getEndSizeVar() const
+{
+	return _endSizeVar;
+}
+
+void ParticleSystem::setEndSizeVar(float sizeVar)
+{
+	_endSizeVar = sizeVar;
+}
+
+void ParticleSystem::setEndSize(float endSize)
+{
+	_endSize = endSize;
+}
+
+float ParticleSystem::getEndSize() const
+{
+	return _endSize;
+}
+
+void ParticleSystem::setEndSpin(float endSpin)
+{
+	_endSpin = endSpin;
+}
+
+float ParticleSystem::getEndSpin() const
+{
+	return _endSpin;
+}
+
+void ParticleSystem::setStartSpinVar(float pinVar)
+{
+	_startSpinVar = pinVar;
+}
+
+void ParticleSystem::setStartSizeVar(float sizeVar)
+{
+	_startSizeVar = sizeVar;
+}
+
+float ParticleSystem::getStartSizeVar() const
+{
+	return _startSizeVar;
+}
+
+void ParticleSystem::setStartSize(float startSize)
+{
+	_startSize = startSize;
+}
+
+float ParticleSystem::getStartSize() const
+{
+	return _startSize;
+}
+
+void ParticleSystem::setEmitterMode(ParticleSystem::Mode mode)
+{
+	_emitterMode = mode;
+}
+
+ParticleSystem::Mode ParticleSystem::getEmitterMode() const
+{
+	return _emitterMode;
+}
+
+void ParticleSystem::setAngleVar(float angleVar)
+{
+	_angleVar = angleVar;
+}
+
+float ParticleSystem::getAngleVar() const
+{
+	return _angleVar;
+}
+
+void ParticleSystem::setAngle(float angle)
+{
+	_angle = angle;
+}
+
+float ParticleSystem::getAngle() const
+{
+	return _angle;
+}
+
+void ParticleSystem::setLifeVar(float lifeVar)
+{
+	_lifeVar = lifeVar;
+}
+
+float ParticleSystem::getLifeVar() const
+{
+	return _lifeVar;
+}
+
+void ParticleSystem::setLife(float life)
+{
+	_life = life;
+}
+
+float ParticleSystem::getLife() const
+{
+	return _life;
+}
+
+void ParticleSystem::setPosVar(const Vec2& pos)
+{
+	_posVar = pos;
+}
+
+const Vec2& ParticleSystem::getPosVar() const
+{
+	return _posVar;
+}
+
+void ParticleSystem::setSourcePosition(const Vec2& pos)
+{
+	_sourcePosition = pos;
+}
+
+const Vec2& ParticleSystem::getSourcePosition() const
+{
+	return _sourcePosition;
+}
+
+void ParticleSystem::setDuration(float duration)
+{
+	_duration = duration;
+}
+
+void ParticleSystem::setAtlasIndex(int index)
+{
+	_atlasIndex = index;
+}
