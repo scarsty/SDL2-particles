@@ -57,8 +57,7 @@ inline static float randomM11(unsigned int* seed)
 	return u._f - 3.0f;
 }
 
-ParticleSystem::ParticleSystem()
-= default;
+ParticleSystem::ParticleSystem() = default;
 
 // implementation ParticleSystem
 
@@ -83,8 +82,7 @@ void ParticleSystem::resetTotalParticles(int numberOfParticles)
 	}
 }
 
-ParticleSystem::~ParticleSystem()
-= default;
+ParticleSystem::~ParticleSystem() = default;
 
 void ParticleSystem::addParticles(int count)
 {
@@ -279,17 +277,23 @@ void ParticleSystem::stopSystem()
 {
 	_isActive = false;
 	_elapsed = _duration;
-	_emitCounter = 0;
+	_emitCounter = 0.f;
 }
 
 void ParticleSystem::resetSystem()
 {
 	_isActive = true;
-	_elapsed = 0;
-	for (int i = 0; i < _particleCount; ++i)
-	{
-		//particle_data_[i].timeToLive = 0.0f;
-	}
+	_elapsed = 0.f;
+	_emitCounter = 0.f;
+
+//	for (int i = 0; i < _particleCount; ++i)
+//	{
+//		_particleData[i]._timeToLive = 0.f;
+//	}
+	_particleData.clear();
+	_particleCount = 0;
+
+	resetTotalParticles(_totalParticles);
 }
 
 bool ParticleSystem::isFull() const

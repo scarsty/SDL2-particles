@@ -31,8 +31,6 @@ public:
 
 typedef Pointf Vec2;
 
-//class ParticleBatchNode;
-
 struct Color4F
 {
 	float _r = 0, _g = 0, _b = 0, _a = 0;
@@ -116,7 +114,6 @@ emitter.startSpin = 0;
 @endcode
 
 */
-
 class ParticleSystem
 {
 public:
