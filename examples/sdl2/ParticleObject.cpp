@@ -6,8 +6,8 @@ ParticleObject::ParticleObject(SDL_Renderer* renderer,
 	int positionX,
 	int positionY) : _particleRenderer{ renderer }, _style{ style }
 {
+	_particleSystem.setPosition({static_cast<float>(positionX), static_cast<float>(positionY)});
 	setStyle(style);
-	_particleSystem.setPosition(static_cast<float>(positionX), static_cast<float>(positionY));
 
 	SDL_Texture* particleTexture = IMG_LoadTexture(_particleRenderer, texturePath);
 	if (particleTexture == nullptr)
@@ -39,14 +39,23 @@ void ParticleObject::draw()
 			continue;
 		}
 		SDL_Rect r =
-			{ int(particleData._posx + particleData._startPosX - particleData._size / 2), int(particleData._posy + particleData._startPosY - particleData._size / 2), int(particleData._size),
+			{ int(particleData._posx + particleData._startPosX - particleData._size / 2),
+			  int(particleData._posy + particleData._startPosY - particleData._size / 2), int(particleData._size),
 			  int(particleData._size) };
 		SDL_Color
-			c = { Uint8(particleData._colorR * 255), Uint8(particleData._colorG * 255), Uint8(particleData._colorB * 255), Uint8(particleData._colorA * 255) };
+			c =
+			{ Uint8(particleData._colorR * 255), Uint8(particleData._colorG * 255), Uint8(particleData._colorB * 255),
+			  Uint8(particleData._colorA * 255) };
 		SDL_SetTextureColorMod(_particleTexture, c.r, c.g, c.b);
 		SDL_SetTextureAlphaMod(_particleTexture, c.a);
 		SDL_SetTextureBlendMode(_particleTexture, SDL_BLENDMODE_BLEND);
-		SDL_RenderCopyEx(_particleRenderer, _particleTexture, nullptr, &r, particleData._rotation, nullptr, SDL_FLIP_NONE);
+		SDL_RenderCopyEx(_particleRenderer,
+			_particleTexture,
+			nullptr,
+			&r,
+			particleData._rotation,
+			nullptr,
+			SDL_FLIP_NONE);
 	}
 
 	_particleSystem.update();
@@ -256,6 +265,160 @@ void ParticleObject::setStyle(ParticleStyle style)
 
 		_particleSystem.setPosVar({ 0.0f, 0.0f });
 		break;
+	}
+	case SMOKE:
+	{
+		int totalParticles{ 200 };
+		_particleSystem.initWithTotalParticles(totalParticles);
+
+		// duration
+		_particleSystem.setDuration(ParticleSystem::DURATION_INFINITY);
+
+		// Gravity Mode
+		_particleSystem.setEmitterMode(ParticleSystem::Mode::GRAVITY);
+
+		// Gravity Mode: gravity
+		_particleSystem.setGravity(Vec2(0.0f, 0.0f));
+
+		// Gravity Mode: radial
+		_particleSystem.setRadialAccel(0);
+		_particleSystem.setRadialAccelVar(0);
+
+		// Gravity Mode: speed of particles
+		_particleSystem.setSpeed(-25.0f);
+		_particleSystem.setSpeedVar(10.0f);
+
+		// starting angle
+		_particleSystem.setAngle(90.0f);
+		_particleSystem.setAngleVar(5.0f);
+
+		// life of particles
+		float life{ 4.0f };
+		_particleSystem.setLife(life);
+		_particleSystem.setLifeVar(1.0f);
+
+		// size, in pixels
+		_particleSystem.setStartSize(60.0f);
+		_particleSystem.setStartSizeVar(10.0f);
+		_particleSystem.setEndSize(ParticleSystem::START_SIZE_EQUAL_TO_END_SIZE);
+
+		// emits per frame
+		_particleSystem.setEmissionRate(static_cast<float>(totalParticles) / life);
+
+		// color of particles
+		_particleSystem.setStartColor({ 0.8f, 0.8f, 0.8f, 1.0f });
+		_particleSystem.setStartColorVar({ 0.02f, 0.02f, 0.02f, 0.0f });
+		_particleSystem.setEndColor({ 0.0f, 0.0f, 0.0f, 1.0f });
+		_particleSystem.setEndColorVar({ 0.0f, 0.0f, 0.0f, 0.0f });
+
+		_particleSystem.setPosVar({ 20.0f, 0.0f });
+		break;
+	}
+	case GALAXY: {
+		int totalParticles{ 200 };
+		_particleSystem.initWithTotalParticles(totalParticles);
+
+		// duration
+		_particleSystem.setDuration(ParticleSystem::DURATION_INFINITY);
+
+		// Gravity Mode
+		_particleSystem.setEmitterMode(ParticleSystem::Mode::GRAVITY);
+
+		// Gravity Mode: gravity
+		_particleSystem.setGravity(Vec2(0.0f, 0.0f));
+
+		// Gravity Mode: radial
+		_particleSystem.setRadialAccel(-80);
+		_particleSystem.setRadialAccelVar(0);
+
+		// Gravity Mode: speed of particles
+		_particleSystem.setSpeed(-60.0f);
+		_particleSystem.setSpeedVar(10.0f);
+
+		// Gravity Mode: tangential
+		_particleSystem.setTangentialAccel(80);
+		_particleSystem.setTangentialAccelVar(0);
+
+		// starting angle
+		_particleSystem.setAngle(90.0f);
+		_particleSystem.setAngleVar(360.0f);
+
+		// life of particles
+		float life{ 4.0f };
+		_particleSystem.setLife(life);
+		_particleSystem.setLifeVar(1.0f);
+
+		// size, in pixels
+		_particleSystem.setStartSize(37.0f);
+		_particleSystem.setStartSizeVar(10.0f);
+		_particleSystem.setEndSize(ParticleSystem::START_SIZE_EQUAL_TO_END_SIZE);
+
+		// emits per frame
+		_particleSystem.setEmissionRate(static_cast<float>(totalParticles) / life);
+
+		// color of particles
+		_particleSystem.setStartColor({ 0.12f, 0.25f, 0.76f, 1.0f });
+		_particleSystem.setStartColorVar({ 0.0f, 0.0f, 0.0f, 0.0f });
+		_particleSystem.setEndColor({ 0.0f, 0.0f, 0.0f, 1.0f });
+		_particleSystem.setEndColorVar({ 0.0f, 0.0f, 0.0f, 0.0f });
+
+		_particleSystem.setPosVar({ 0.0f, 0.0f });
+		break;
+	}
+	case RAIN: {
+		_particleSystem.initWithTotalParticles(1000);
+
+		// duration
+		_particleSystem.setDuration(ParticleSystem::DURATION_INFINITY);
+
+		// Gravity Mode
+		_particleSystem.setEmitterMode(ParticleSystem::Mode::GRAVITY);
+
+		// Gravity Mode: gravity
+		_particleSystem.setGravity(Vec2(10.f, 10.f));
+
+		// Gravity Mode: radial
+		_particleSystem.setRadialAccel(0);
+		_particleSystem.setRadialAccelVar(1);
+
+		// Gravity Mode: tangential
+		_particleSystem.setTangentialAccel(0);
+		_particleSystem.setTangentialAccelVar(1);
+
+		// Gravity Mode: speed of particles
+		_particleSystem.setSpeed(-130.f);
+		_particleSystem.setSpeedVar(30.f);
+
+		// starting angle
+		_particleSystem.setAngle(-90.f);
+		_particleSystem.setAngleVar(5.f);
+
+		// life of particles
+		_particleSystem.setLife(4.5f);
+		_particleSystem.setLifeVar(0.f);
+
+		// size, in pixels
+		_particleSystem.setStartSize(4.f);
+		_particleSystem.setStartSizeVar(2.f);
+		_particleSystem.setEndSize(ParticleSystem::START_SIZE_EQUAL_TO_END_SIZE);
+
+		// emits per frame
+		_particleSystem.setEmissionRate(20);
+
+		// color of particles
+		_particleSystem.setStartColor({ 0.7f, 0.8f, 1.f, 1.0f });
+		_particleSystem.setStartColorVar({ 0.f, 0.f, 0.f, 0.f });
+		_particleSystem.setEndColor({ 0.7f, 0.8f, 1.f, 0.5f });
+		_particleSystem.setEndColorVar({ 0.0f, 0.0f, 0.0f, 0.0f });
+
+		_particleSystem.setPosVar({_particleSystem.getPosition()._x, 0.0f });
+		break;
+	}
+	case METEOR: {
+
+	}
+	case FLOWER: {
+
 	}
 	default:
 		break;

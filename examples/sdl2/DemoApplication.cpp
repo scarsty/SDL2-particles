@@ -76,19 +76,31 @@ void DemoApplication::execute()
 		{ _sdlRenderer, "assets/bigStar.png", ParticleObject::ParticleStyle::SNOW, _screenWidth / 2,
 		  _screenHeight / 2 };
 	ParticleObject fireParticles
-		{ _sdlRenderer, "assets/fire.png", ParticleObject::ParticleStyle::FIRE, _screenWidth / 2, _screenHeight / 2 };
+		{ _sdlRenderer, "assets/dot.png", ParticleObject::ParticleStyle::FIRE, _screenWidth / 2, _screenHeight / 2 };
 	ParticleObject fireworkParticles
-		{ _sdlRenderer, "assets/fire.png", ParticleObject::ParticleStyle::FIREWORK, _screenWidth / 2,
+		{ _sdlRenderer, "assets/dot.png", ParticleObject::ParticleStyle::FIREWORK, _screenWidth / 2,
 		  _screenHeight / 2 };
 	ParticleObject explosionParticles
-		{ _sdlRenderer, "assets/fire.png", ParticleObject::ParticleStyle::EXPLOSION, _screenWidth / 2,
+		{ _sdlRenderer, "assets/dot.png", ParticleObject::ParticleStyle::EXPLOSION, _screenWidth / 2,
 		  _screenHeight / 2 };
+	ParticleObject smokeParticles
+		{ _sdlRenderer, "assets/dot.png", ParticleObject::ParticleStyle::SMOKE, _screenWidth / 2,
+		  _screenHeight / 2 };
+	ParticleObject galaxyParticles
+		{ _sdlRenderer, "assets/dot.png", ParticleObject::ParticleStyle::GALAXY, _screenWidth / 2,
+		  _screenHeight / 2 };
+	ParticleObject rainParticles
+		{ _sdlRenderer, "assets/dot.png", ParticleObject::ParticleStyle::RAIN, _screenWidth,
+		  0 };
 
 	std::vector<ParticleObject*> particleObjects{};
 	particleObjects.push_back(&fireParticles);
+	particleObjects.push_back(&smokeParticles);
 	particleObjects.push_back(&snowParticles);
 	particleObjects.push_back(&fireworkParticles);
 	particleObjects.push_back(&explosionParticles);
+	particleObjects.push_back(&galaxyParticles);
+	particleObjects.push_back(&rainParticles);
 
 	size_t index{ 0 };
 	bool quitApplication{ false };

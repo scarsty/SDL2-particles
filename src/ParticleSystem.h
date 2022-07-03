@@ -10,20 +10,22 @@ struct Pointf
 {
  public:
 	Pointf() = default;
+
 	Pointf(float x, float y)
 		: _x(x), _y(y)
 	{
 	}
 	~Pointf() = default;
+
 	float _x = 0, _y = 0;
-	Pointf
-	operator*(float f) const
+
+	Pointf operator*(float f) const
 	{
 		Pointf p{ _x * f, _y * f };
 		return p;
 	}
-	[[nodiscard]] float
-	getAngle() const
+
+	[[nodiscard]] float getAngle() const
 	{
 		return atan2f(_y, _x);
 	}
@@ -810,9 +812,14 @@ class ParticleSystem
 	float _x = 0, _y = 0;
 
  public:
-	void setPosition(float x, float y)
+	void setPosition(const Vec2& position)
 	{
-		_x = x;
-		_y = y;
+		_x = position._x;
+		_y = position._y;
+	}
+
+	[[nodiscard]] Vec2 getPosition() const
+	{
+		return { _x, _y };
 	}
 };

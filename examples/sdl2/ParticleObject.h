@@ -16,6 +16,11 @@ class ParticleObject
 		FIRE,
 		FIREWORK,
 		EXPLOSION,
+		SMOKE,
+		GALAXY,
+		RAIN,
+		METEOR,
+		FLOWER,
 	};
 
 	ParticleObject(SDL_Renderer* renderer, const char* texturePath, ParticleStyle style, int positionX, int positionY);
