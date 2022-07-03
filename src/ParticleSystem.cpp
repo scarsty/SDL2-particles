@@ -420,27 +420,6 @@ void ParticleSystem::update()
 	}
 }
 
-
-//void ParticleSystem::draw()
-//{
-//
-//    for (int i = 0; i < _particleCount; i++)
-//    {
-//        auto& p = particle_data_[i];
-//        if (p.size <=0 || p.colorA <= 0)
-//        {
-//            continue;
-//        }
-//        SDL_Rect r = { int(p.posx + p.startPosX - p.size / 2), int(p.posy + p.startPosY - p.size / 2), int(p.size), int(p.size) };
-//        SDL_Color c = { Uint8(p.colorR * 255), Uint8(p.colorG * 255), Uint8(p.colorB * 255), Uint8(p.colorA * 255) };
-//        SDL_SetTextureColorMod(_texture, c.r, c.g, c.b);
-//        SDL_SetTextureAlphaMod(_texture, c.a);
-//        SDL_SetTextureBlendMode(_texture, SDL_BLENDMODE_BLEND);
-//        SDL_RenderCopyEx(_renderer, _texture, nullptr, &r, p.rotation, nullptr, SDL_FLIP_NONE);
-//    }
-//    update();
-//}
-
 // ParticleSystem - Properties of Gravity Mode
 void ParticleSystem::setTangentialAccel(float t)
 {

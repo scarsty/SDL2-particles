@@ -33,20 +33,20 @@ void ParticleObject::draw()
 {
 	for (int i = 0; i < _particleSystem.getParticleCount(); i++)
 	{
-		auto p = _particleSystem.getParticleData(i);
-		if (p._size <= 0 || p._colorA <= 0)
+		auto particleData = _particleSystem.getParticleData(i);
+		if (particleData._size <= 0 || particleData._colorA <= 0)
 		{
 			continue;
 		}
 		SDL_Rect r =
-			{ int(p._posx + p._startPosX - p._size / 2), int(p._posy + p._startPosY - p._size / 2), int(p._size),
-			  int(p._size) };
+			{ int(particleData._posx + particleData._startPosX - particleData._size / 2), int(particleData._posy + particleData._startPosY - particleData._size / 2), int(particleData._size),
+			  int(particleData._size) };
 		SDL_Color
-			c = { Uint8(p._colorR * 255), Uint8(p._colorG * 255), Uint8(p._colorB * 255), Uint8(p._colorA * 255) };
+			c = { Uint8(particleData._colorR * 255), Uint8(particleData._colorG * 255), Uint8(particleData._colorB * 255), Uint8(particleData._colorA * 255) };
 		SDL_SetTextureColorMod(_particleTexture, c.r, c.g, c.b);
 		SDL_SetTextureAlphaMod(_particleTexture, c.a);
 		SDL_SetTextureBlendMode(_particleTexture, SDL_BLENDMODE_BLEND);
-		SDL_RenderCopyEx(_particleRenderer, _particleTexture, nullptr, &r, p._rotation, nullptr, SDL_FLIP_NONE);
+		SDL_RenderCopyEx(_particleRenderer, _particleTexture, nullptr, &r, particleData._rotation, nullptr, SDL_FLIP_NONE);
 	}
 
 	_particleSystem.update();
