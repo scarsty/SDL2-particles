@@ -72,17 +72,19 @@ void DemoApplication::execute()
 		throw std::exception("DemoApplication is not initialised.");
 	}
 
-	bool quitApplication{ false };
-	SDL_Event sdlEvent{};
-
 	ParticleObject snowParticles
 		{ _sdlRenderer, "assets/bigStar.png", ParticleObject::ParticleStyle::SNOW, _screenWidth / 2,
 		  _screenHeight / 2 };
 	ParticleObject fireParticles
 		{ _sdlRenderer, "assets/fire.png", ParticleObject::ParticleStyle::FIRE, _screenWidth / 2, _screenHeight / 2 };
 
+	std::vector<ParticleObject*> particleObjects{};
+	particleObjects.push_back(&fireParticles);
+	particleObjects.push_back(&snowParticles);
+
 	size_t index{ 0 };
-	size_t amount{ 2 };
+	bool quitApplication{ false };
+	SDL_Event sdlEvent{};
 
 	while (!quitApplication)
 	{
@@ -102,7 +104,7 @@ void DemoApplication::execute()
 				if (sdlEvent.button.button == SDL_BUTTON_LEFT || SDL_BUTTON_RIGHT)
 				{
 					index++;
-					if (index >= amount)
+					if (index >= particleObjects.size())
 					{
 						index = 0;
 					}
@@ -114,17 +116,7 @@ void DemoApplication::execute()
 		}
 		SDL_RenderClear(_sdlRenderer);
 
-		switch (index)
-		{
-		case 0:
-			fireParticles.draw();
-			break;
-		case 1:
-			snowParticles.draw();
-			break;
-		default:
-			break;
-		}
+		particleObjects[index]->draw();
 
 		SDL_RenderPresent(_sdlRenderer);
 		SDL_Delay(10);
