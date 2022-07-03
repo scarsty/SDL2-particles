@@ -78,12 +78,17 @@ void DemoApplication::execute()
 	ParticleObject fireParticles
 		{ _sdlRenderer, "assets/fire.png", ParticleObject::ParticleStyle::FIRE, _screenWidth / 2, _screenHeight / 2 };
 	ParticleObject fireworkParticles
-		{ _sdlRenderer, "assets/fire.png", ParticleObject::ParticleStyle::FIREWORK, _screenWidth / 2, _screenHeight / 2 };
+		{ _sdlRenderer, "assets/fire.png", ParticleObject::ParticleStyle::FIREWORK, _screenWidth / 2,
+		  _screenHeight / 2 };
+	ParticleObject explosionParticles
+		{ _sdlRenderer, "assets/fire.png", ParticleObject::ParticleStyle::EXPLOSION, _screenWidth / 2,
+		  _screenHeight / 2 };
 
 	std::vector<ParticleObject*> particleObjects{};
 	particleObjects.push_back(&fireParticles);
 	particleObjects.push_back(&snowParticles);
 	particleObjects.push_back(&fireworkParticles);
+	particleObjects.push_back(&explosionParticles);
 
 	size_t index{ 0 };
 	bool quitApplication{ false };
@@ -104,22 +109,28 @@ void DemoApplication::execute()
 			}
 			case SDL_MOUSEBUTTONDOWN:
 			{
-				if (sdlEvent.button.button == SDL_BUTTON_RIGHT)
+				if (sdlEvent.button.button == SDL_BUTTON_RIGHT || SDL_BUTTON_LEFT)
 				{
-					index++;
-					if (index >= particleObjects.size())
+					particleObjects[index]->reset();
+
+					if (sdlEvent.button.button == SDL_BUTTON_RIGHT)
 					{
-						index = 0;
+						index++;
+						if (index >= particleObjects.size())
+						{
+							index = 0;
+						}
 					}
-				}
-				else if (sdlEvent.button.button == SDL_BUTTON_LEFT)
-				{
-					if (index == 0)
+					else if (sdlEvent.button.button == SDL_BUTTON_LEFT)
 					{
-						index = particleObjects.size() - 1;
-					}
-					else {
-						index--;
+						if (index == 0)
+						{
+							index = particleObjects.size() - 1;
+						}
+						else
+						{
+							index--;
+						}
 					}
 				}
 			}
