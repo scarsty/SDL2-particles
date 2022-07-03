@@ -5,20 +5,34 @@ A Particle System than be used in any C++ 17 (or higher) project.
 Modified from that of Cocos2dx and forked from [SDL2-particles](https://github.com/scarsty/SDL2-particles).
 
 ## Effect Examples
+In [ParticleObject.cpp](examples/sdl2/ParticleObject.cpp) you can find how these effects are created.
 
-//TODO add gifs
+### Fire
+![fire example](examples/sdl2/gifs/fire_example.gif)
 
-Fire
+### Explosion
+![explosion example](examples/sdl2/gifs/explosion_example.gif)
 
-![fire](./pic/fire.png)
+### Firework
+![firework example](examples/sdl2/gifs/firework_example.gif)
 
-Snow
+### Flower
+![flower example](examples/sdl2/gifs/flower_example.gif)
 
-![snow](examples/sdl2/assets/snow.png)
+### Galaxy
+![galaxy example](examples/sdl2/gifs/galaxy_example.gif)
 
-## How to use:
+### Meteor
+![meteor example](examples/sdl2/gifs/meteor_example.gif)
 
-**@TODO!!!!**
+### Rain
+![rain example](examples/sdl2/gifs/rain_example.gif)
+
+### Smoke
+![smoke example](examples/sdl2/gifs/smoke_example.gif)
+
+### Snow
+![snow example](examples/sdl2/gifs/snow_example.gif)
 
 ## LICENSE
-[See the LICENSE file](./LICENSE)
+[See the LICENSE file.](./LICENSE)
