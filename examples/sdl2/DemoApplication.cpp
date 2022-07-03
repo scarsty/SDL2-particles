@@ -92,15 +92,23 @@ void DemoApplication::execute()
 	ParticleObject rainParticles
 		{ _sdlRenderer, "assets/dot.png", ParticleObject::ParticleStyle::RAIN, _screenWidth,
 		  0 };
+	ParticleObject meteorParticles
+		{ _sdlRenderer, "assets/dot.png", ParticleObject::ParticleStyle::METEOR, static_cast<int>(_screenWidth / 1.5),
+		  static_cast<int>(_screenHeight / 1.5) };
+	ParticleObject flowerParticles
+		{ _sdlRenderer, "assets/dot.png", ParticleObject::ParticleStyle::FLOWER, _screenWidth / 2,
+		  _screenHeight / 2 };
 
 	std::vector<ParticleObject*> particleObjects{};
-	particleObjects.push_back(&fireParticles);
+	particleObjects.push_back(&fireworkParticles);
+	particleObjects.push_back(&rainParticles);
 	particleObjects.push_back(&smokeParticles);
 	particleObjects.push_back(&snowParticles);
-	particleObjects.push_back(&fireworkParticles);
+	particleObjects.push_back(&fireParticles);
 	particleObjects.push_back(&explosionParticles);
 	particleObjects.push_back(&galaxyParticles);
-	particleObjects.push_back(&rainParticles);
+	particleObjects.push_back(&meteorParticles);
+	particleObjects.push_back(&flowerParticles);
 
 	size_t index{ 0 };
 	bool quitApplication{ false };
